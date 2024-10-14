@@ -25,7 +25,6 @@ mu=Symbol("mu")
 c=Symbol("c")
 phi=Symbol("phi")
 theta=Symbol("theta")
-X = Matrix([(N-I-(1-sigma)*V)*(beta*I)/N-(mu+c)*I,phi*(N-I-V)-sigma*beta*V*I/N-(mu+theta)*V])
 ```
 ,
     
