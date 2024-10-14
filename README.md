@@ -15,7 +15,7 @@ import sympy as sp
 
 Consider the model describe in the [Article](https://www.sciencedirect.com/science/article/abs/pii/S0025556400000031), then
 1. Define the variaveis and system
-   ```python
+```python
 I = Symbol("I")
 V = Symbol("V")
 N = Symbol("N")
