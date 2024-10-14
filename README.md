@@ -28,9 +28,17 @@ theta=Symbol("theta")
 ```
 2. Define the system
 ```python
-X = Matrix([(N-I-(1-sigma)*V)*(beta*I)/N-(mu+c)*I,
-            phi*(N-I-V)-sigma*beta*V*I/N-(mu+theta)*V
-            ])
+X = Matrix([(N-I-(1-sigma)*V)*(beta*I)/N-(mu+c)*I,phi*(N-I-V)-sigma*beta*V*I/N-(mu+theta)*V])
 ```
 
-    
+3. Determine the Jacobian with respect all variaveis
+```python
+Y = Matrix([I,V])
+Z=X.jacobian(Y)
+```
+4. Subtitute the endemic point
+```python
+Z=Z.evalf(subs={I:0,V:phi*N/(mu+phi+theta)})
+Z=simplify(Z)
+```
+
