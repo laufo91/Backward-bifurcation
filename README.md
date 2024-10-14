@@ -2,7 +2,7 @@
 For epidemiological models, calculating the backward bifurcation represents having knowledge about disease control. In the [article](https://www.aimsciences.org/article/doi/10.3934/mbe.2004.1.361), they employ a technique that involves 
 determining the values of $a$ and $b$ to know whether a backward bifurcation exists or not.
 
-I use python, the libreries are
+I use python, the libraries are
 ```python
 from sympy.solvers import solve
 from sympy import Symbol
@@ -13,7 +13,7 @@ from sympy import *
 import sympy as sp
 ```
 
-Consider the model described in the [Article](https://www.sciencedirect.com/science/article/abs/pii/S0025556400000031), then
+Consider the model described in the [Article](https://www.sciencedirect.com/science/article/abs/pii/S0025556400000031), the ideas of programming next, but remember with each system de values changes.
 1. Define the variaveis
 ```python
 I = Symbol("I")
@@ -31,12 +31,12 @@ theta=Symbol("theta")
 X = Matrix([(N-I-(1-sigma)*V)*(beta*I)/N-(mu+c)*I,phi*(N-I-V)-sigma*beta*V*I/N-(mu+theta)*V])
 ```
 
-3. Determine the Jacobian with respect all variaveis
+3. Determine the Jacobian with respect all variables
 ```python
 Y = Matrix([I,V])
 Z=X.jacobian(Y)
 ```
-4. Subtitute the endemic point
+4. Substitute the endemic point
 ```python
 Z=Z.evalf(subs={I:0,V:phi*N/(mu+phi+theta)})
 Z=simplify(Z)
@@ -48,7 +48,7 @@ Z=simplify(Z)
 ```
 
 Rembember, if all calcultions are perfect, the determinat sholud be $0$.
-6. Determine the autovetor fos left and right associated to autovalue $0$
+6. Determine the autovetor for left and right associated to autovalue $0$
 ```python
 v=Z.left_eigenvects()[0][2][0]
 w=Z.eigenvects()[0][2][0]
@@ -62,7 +62,7 @@ if v.dot(w)!=1:
 v=simplify(v)
 w=simplify(w)
 ```
-8. For determine the value $b$
+8. For determine the value $b$ next
 ```python
 y = Matrix([beta])# beta was the value solved in the item 5. 
 Matrix_b=X.jacobian(y)
@@ -79,7 +79,7 @@ b=simplify(b)
 print("b")
 b
 ```
-9. For determine the value $a$
+9. For determine the value $a$ next:
 ```python
 aa=0
 for pp in range(2):
@@ -95,5 +95,5 @@ print("a")
 aa=simplify(aa)
 aa
 ```
-
+If $a>0$ and $b>0$ the backward bifurcation exits.
 
