@@ -13,7 +13,7 @@ from sympy import *
 import sympy as sp
 ```
 
-Consider the model describe in the [Article](https://www.sciencedirect.com/science/article/abs/pii/S0025556400000031), then
+Consider the model described in the [Article](https://www.sciencedirect.com/science/article/abs/pii/S0025556400000031), then
 1. Define the variaveis
 ```python
 I = Symbol("I")
@@ -41,4 +41,10 @@ Z=X.jacobian(Y)
 Z=Z.evalf(subs={I:0,V:phi*N/(mu+phi+theta)})
 Z=simplify(Z)
 ```
+5. In this model, $R_0=\frac{\beta}{\mu+c}\frac{\mu+θ+\sigma \phi}{\mu+\theta+\phi}$, equal $1$ and solve for any variable. In this case $\beta=(\mu+c) \frac{\mu+\theta+\phi}{\mu+θ+\sigma \phi}$, then substitue en last matrix.
+```python
+Z=Z.evalf(subs={beta:(mu+c)*(mu+theta+phi)/(mu+theta+sigma*phi)})
+Z=simplify(Z)
+```
+
 
