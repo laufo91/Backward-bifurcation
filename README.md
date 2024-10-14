@@ -14,7 +14,7 @@ import sympy as sp
 ```
 
 Consider the model describe in the [Article](https://www.sciencedirect.com/science/article/abs/pii/S0025556400000031), then
-1. Define the variaveis and system
+1. Define the variaveis
 ```python
 I = Symbol("I")
 V = Symbol("V")
@@ -26,5 +26,11 @@ c=Symbol("c")
 phi=Symbol("phi")
 theta=Symbol("theta")
 ```
-,
+2. Define the system
+```python
+X = Matrix([(N-I-(1-sigma)*V)*(beta*I)/N-(mu+c)*I,
+            phi*(N-I-V)-sigma*beta*V*I/N-(mu+theta)*V
+            ])
+```
+
     
