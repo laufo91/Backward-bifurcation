@@ -3,4 +3,7 @@ For epidemiological models, calculating the backward bifurcation represents havi
 determining the values of a and b to know whether a backward bifurcation exists or not.
 
 I use python, see some examples:
-1. Cosider the model  
+1. Consider the model
+   \begin{equation}
+   x=c
+   \end{equation} 
