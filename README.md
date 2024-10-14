@@ -47,4 +47,53 @@ Z=Z.evalf(subs={beta:(mu+c)*(mu+theta+phi)/(mu+theta+sigma*phi)})
 Z=simplify(Z)
 ```
 
+Rembember, if all calcultions are perfect, the determinat sholud be $0$.
+6. Determine the autovetor fos left and right associated to autovalue $0$
+```python
+v=Z.left_eigenvects()[0][2][0]
+w=Z.eigenvects()[0][2][0]
+```
+7. Verificated the dot product is $1$, in case negative apply:
+```python
+if v.dot(w)!=1:
+  l=Symbol("l")
+  escalar=solve((l*v).dot(w)-1, l)
+  w=escalar[0]*w
+v=simplify(v)
+w=simplify(w)
+```
+8. For determine the value $b$
+```python
+y = Matrix([beta])# beta was the value solved in the item 5. 
+Matrix_b=X.jacobian(y)
+Y = Matrix([I,V])
+Matrix_b1=Matrix_b.jacobian(Y)
+Matrix_b1=Matrix_b1.evalf(subs={I:0,V:phi*N/(mu+phi+theta),beta:(mu+c)*(mu+theta+phi)/(mu+theta+sigma*phi)})# Substitute beta as item 5 and endemic point
+Matrix_b1
+b=0
+for j in range(2):#El 2 es el numero de ecuaciones
+  for i in range(2):
+    if Matrix_b1[j,i]!=0:
+      b=b+Matrix_b1[j,i]*v[j]*w[i]
+b=simplify(b)
+print("b")
+b
+```
+9. For determine the value $a$
+```python
+aa=0
+for pp in range(2):
+  XX=Matrix([X[pp]])
+  matrix_a=hessian(XX,(I,V))
+  matrix_a=matrix_a.evalf(subs={I:0,V:phi*N/(mu+phi+theta),beta:(mu+c)*(mu+theta+phi)/(mu+theta+sigma*phi)}) # Substitute beta as item 5 and endemic point
+  for i in range(0,2):
+    for j in range(0,2):
+      if matrix_a[i,j]!=0:
+        aa=aa+matrix_a[i,j]*v[pp]*w[i]*w[j]
+        aa=simplify(aa)
+print("a")
+aa=simplify(aa)
+aa
+```
+
 
