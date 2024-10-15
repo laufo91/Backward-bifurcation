@@ -1,8 +1,7 @@
 # Backward-bifurcation
 In epidemiological models, calculating the backward bifurcation provides valuable insights into disease control. In the [article](https://www.aimsciences.org/article/doi/10.3934/mbe.2004.1.361) the authors use a technique that involves determining the values of $a$ and $b$ to assess the existence of a backward bifurcation.
 
-article, 
-I use python, the libraries are
+To describe the backward bifurcation, you need to know the disease-free equilibrium point and $R_0$. I used Python, and the libraries are:
 ```python
 from sympy.solvers import solve
 from sympy import Symbol
