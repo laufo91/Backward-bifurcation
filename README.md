@@ -78,7 +78,7 @@ b=simplify(b)
 print("b")
 b
 ```
-9. To determine the value of $b$, proceed as follows:
+9. To determine the value of $a$, proceed as follows:
 ```python
 aa=0
 for pp in range(2):
