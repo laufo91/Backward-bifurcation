@@ -1,7 +1,7 @@
 # Backward-bifurcation
-For epidemiological models, calculating the backward bifurcation represents having knowledge about disease control. In the [article](https://www.aimsciences.org/article/doi/10.3934/mbe.2004.1.361), they employ a technique that involves 
-determining the values of $a$ and $b$ to know whether a backward bifurcation exists or not.
+In epidemiological models, calculating the backward bifurcation provides valuable insights into disease control. In the [article](https://www.aimsciences.org/article/doi/10.3934/mbe.2004.1.361) the authors use a technique that involves determining the values of $a$ and $b$ to assess the existence of a backward bifurcation.
 
+article, 
 I use python, the libraries are
 ```python
 from sympy.solvers import solve
@@ -31,29 +31,29 @@ theta=Symbol("theta")
 X = Matrix([(N-I-(1-sigma)*V)*(beta*I)/N-(mu+c)*I,phi*(N-I-V)-sigma*beta*V*I/N-(mu+theta)*V])
 ```
 
-3. Determine the Jacobian with respect all variables
+3. Determine the Jacobian with respect to all variables.
 ```python
 Y = Matrix([I,V])
 Z=X.jacobian(Y)
 ```
-4. Substitute the endemic point
+4. Substitute the endemic point into the matrix.
 ```python
 Z=Z.evalf(subs={I:0,V:phi*N/(mu+phi+theta)})
 Z=simplify(Z)
 ```
-5. In this model, $R_0=\frac{\beta}{\mu+c}\frac{\mu+θ+\sigma \phi}{\mu+\theta+\phi}$, equal $1$ and solve for any variable. In this case $\beta=(\mu+c) \frac{\mu+\theta+\phi}{\mu+θ+\sigma \phi}$, then substitue en last matrix.
+5. In this model, $R_0=\frac{\beta}{\mu+c} \frac{\mu+\theta+\sigma \phi}{\mu+\theta+\phi}$ is set equal to 1, and solved for any variable. In this case, $\beta = (\mu+c) \frac{\mu+\theta+\phi}{\mu+\theta+\sigma \phi}$. Then, substitute this into the last matrix.
 ```python
 Z=Z.evalf(subs={beta:(mu+c)*(mu+theta+phi)/(mu+theta+sigma*phi)})
 Z=simplify(Z)
 ```
-
 Rembember, if all calcultions are perfect, the determinat sholud be $0$.
-6. Determine the autovetor for left and right associated to autovalue $0$
+
+6. Determine the left and right eigenvectors associated with the eigenvalue $0$.
 ```python
 v=Z.left_eigenvects()[0][2][0]
 w=Z.eigenvects()[0][2][0]
 ```
-7. Verificated the dot product is $1$, in case negative apply:
+7. Verify that the dot product is $1$; if it is negative, apply the following:
 ```python
 if v.dot(w)!=1:
   l=Symbol("l")
@@ -62,7 +62,7 @@ if v.dot(w)!=1:
 v=simplify(v)
 w=simplify(w)
 ```
-8. For determine the value $b$ next
+8. To determine the value of $b$, proceed as follows:
 ```python
 y = Matrix([beta])# beta was the value solved in the item 5. 
 Matrix_b=X.jacobian(y)
@@ -79,7 +79,7 @@ b=simplify(b)
 print("b")
 b
 ```
-9. For determine the value $a$ next:
+9. To determine the value of $b$, proceed as follows:
 ```python
 aa=0
 for pp in range(2):
